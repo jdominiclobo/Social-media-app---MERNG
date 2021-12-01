@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
 
 const postSchema = new Schema({
-  body: String,
+  body: String, // We can define it (as a mongo schema(mongo is schemaless in real)) as String here and also let Graphql define it
   username: String,
   createdAt: String,
   comments: [
@@ -19,7 +19,7 @@ const postSchema = new Schema({
   ],
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "users", // Though mongo is non-relational or schemaless, the ORM lets us have a relation with the data models
   },
 });
 

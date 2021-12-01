@@ -1,5 +1,4 @@
 const { ApolloServer } = require("apollo-server");
-// const gql = require("graphql-tag");
 const mongoose = require("mongoose");
 
 const typeDefs = require("./graphql/typeDefs");
@@ -9,6 +8,7 @@ const { URI } = require("./config");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }), // this will take the request body and forward it to the context
 });
 
 // Defining the PORT
