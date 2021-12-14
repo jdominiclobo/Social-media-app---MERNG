@@ -5,7 +5,7 @@ import { Menu } from "semantic-ui-react";
 const MenuBar = () => {
   const pathname = window.location.pathname;
   // /login
-  const path = pathname === "/" ? "home" : pathname.substr(1);
+  const path = pathname === "/home" ? "home" : pathname.substr(1);
   const [activeItem, setActiveItem] = useState(path);
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
@@ -17,7 +17,7 @@ const MenuBar = () => {
         active={activeItem === "home"}
         onClick={handleItemClick}
         as={Link}
-        to="/"
+        to="/home"
       />
 
       <Menu.Menu position="right">
