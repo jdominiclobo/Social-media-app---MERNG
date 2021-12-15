@@ -26,10 +26,10 @@ const Register = (props) => {
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, result) {
       console.log("result in update", result);
+      props.history.push("/home");
     },
     onError(err) {
-      console.log("these are the damn errors", err.graphQLErrors);
-
+      // console.log("these are the damn errors", err.graphQLErrors);
       if (
         err &&
         err.graphQLErrors &&
@@ -47,8 +47,6 @@ const Register = (props) => {
     // this is hoisted and hence it is recognised on top because of the function keyword (funny javascript)
     addUser();
   }
-
-  // navigate("/home");
 
   return (
     <div className="form-container">
