@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { Button, Form } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../context/auth";
 import { useForm } from "../util/hooks";
 
 const Register = (props) => {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const initialState = {
@@ -24,9 +26,10 @@ const Register = (props) => {
   const navigate = useNavigate();
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
-    update(_, result) {
-      console.log("result in update", result);
-      props.history.push("/home");
+    update(_, { data: { register: userData } }) {
+      context.login(userData); // because when the user registers, he logins as well
+      // console.log("result in update", result);
+      navigate("/");
     },
     onError(err) {
       // console.log("these are the damn errors", err.graphQLErrors);
